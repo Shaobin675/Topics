@@ -1,0 +1,15 @@
+class Solution:
+    def permuteUnique(self, nums: List[int]) -> List[List[int]]:
+        result=[]
+        
+        def helper(result, tmp, seq, nums):
+            if len(tmp)==len(nums):
+                if tmp not in result:
+                    result.append(tmp)
+                    return
+            for i in range(len(nums)):
+                if i not in seq:#unique in index
+                    helper(result, tmp+[nums[i]], seq+[i], nums)
+                
+        helper(result, [], [], nums)
+        return result
