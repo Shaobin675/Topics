@@ -1,0 +1,14 @@
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        result=[]
+        
+        def helper(result, tmp, nums):
+            if len(tmp)==len(nums):
+                result.append(tmp)
+                return
+                        
+            for i in range(len(nums)):
+                if nums[i] not in tmp:
+                    helper(result, tmp+[nums[i]], nums)
+        helper(result, [], nums)
+        
+        return result
