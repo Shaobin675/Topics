@@ -1,0 +1,30 @@
+class Solution:
+    def nextPermutation(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        l=len(nums)
+        if not nums:
+            return None
+        smaller=l-2
+        #find the left element to the peak
+        while smaller>=0 and nums[smaller]>=nums[smaller+1]:
+            smaller-=1
+        
+        peak=l-1
+        if smaller>=0:
+        #find the peak
+            while peak>=0 and nums[smaller]>=nums[peak]:
+                peak-=1
+            nums[peak], nums[smaller]=nums[smaller], nums[peak]
+            
+            
+        self.reverse(nums, smaller+1)
+        
+    def reverse(self, nums, st):
+        
+        end=len(nums)-1
+        while st<end:
+            nums[st], nums[end]=nums[end], nums[st]
+            st+=1
+            end-=1
