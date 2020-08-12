@@ -1,0 +1,20 @@
+class Solution:
+    def combinationSum4(self, nums: List[int], target: int) -> int:
+        mem=[-1]*(target+1)
+        mem[0]=1 #initial
+        res=0
+        
+        def helper(nums, target):
+            if target<0:
+                return 0
+            if mem[target]!=-1:
+                return mem[target]
+            ans=0
+            
+            for num in nums:#from target to 0
+                ans+=helper(nums, target-num)
+            mem[target]=ans
+            return ans
+                
+        return helper( nums, target)
+        
