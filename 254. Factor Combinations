@@ -1,0 +1,16 @@
+class Solution:
+    def getFactors(self, n: int) -> List[List[int]]:
+        res=[]
+        if n<4:
+            return []
+        def helper(res, tmp, n, index):
+ 
+            for i in range(index, n):
+                #get rid of the list starting with large numbers
+                if i*i>n:
+                    return 
+                if n%i==0:
+                    res.append(tmp+[i, n//i])
+                    helper(res, tmp+[i], n//i, i)
+        helper(res, [], n, 2)
+        return res
