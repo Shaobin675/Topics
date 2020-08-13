@@ -1,0 +1,16 @@
+class Solution:
+    def letterCombinations(self, digits: str) -> List[str]:
+        if not digits:
+            return []
+        mapping=['', '', 'abc','def', 'ghi','jkl','mno','pqrs','tuv', 'wxyz']
+        res=[]
+        
+        def helper(res, tmp, mapping, digits, index):
+            if len(tmp)==len(digits):
+                res.append(tmp)
+                return
+            for ch in mapping[int(digits[index])]:
+                helper(res, tmp+ch, mapping, digits, index+1)
+                    
+        helper(res, "", mapping, digits,0)
+        return res
