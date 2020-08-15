@@ -1,0 +1,22 @@
+class Solution:
+    def restoreIpAddresses(self, s: str) -> List[str]:
+        if not s:
+            return []
+        res=[]
+        
+        def helper(s, tmps, dot):
+            if dot<0:
+                return
+            if dot==0 and len(s)==0:
+                res.append('.'.join(tmps[:]))
+                return
+            # if len(s)>3*(4-len(tmps)):
+            #     return
+            num=0
+            for i in range(min(3, len(s))):
+                num=10*num+int(s[i])
+                if (i>0 and s[0]=='0') or num>255:
+                    break
+                helper(s[i+1:], tmps+[str(num)], dot-1)
+        helper(s, [], 4)
+        return res
