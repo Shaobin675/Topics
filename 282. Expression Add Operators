@@ -1,0 +1,37 @@
+class Solution:
+    def addOperators(self, num: str, target: int) -> List[str]:
+        n=len(num)
+        exp=['0']*(2*n)
+        res=[]
+        self.helper(res, exp, 0, num, target, 0, 0, 0)
+        
+        return res
+    
+    #pos, p are the index in num
+    #l, l2 are the index in exp
+    def helper(self, res, exp, pos, num, target, l, pre, cur):
+        if pos==len(num):
+            if cur==target:
+                res.append("".join(exp[:l]))
+                return
+        m=0
+        p=pos
+        l2=l
+        if p!=0:
+            l+=1
+        while pos<len(num):
+            m=m*10+int(num[pos])
+            if pos!=p and num[p]=='0':
+                break
+            exp[l]=num[pos]
+            l+=1
+            pos+=1
+            if p==0:
+                self.helper(res, exp, pos, num, target, l, m, m)
+            else:
+                exp[l2]="+"
+                self.helper(res, exp, pos, num, target, l, +m, cur+m)
+                exp[l2]="-"
+                self.helper(res, exp, pos, num, target, l, -m, cur-m)
+                exp[l2]="*"
+                self.helper(res, exp, pos, num, target, l, pre*m, pre*m+cur-pre)
