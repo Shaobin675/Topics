@@ -1,0 +1,22 @@
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> List[str]:
+        if not wordDict:
+            return None
+        words=set(wordDict)
+        res={}
+        
+        def helper(substr):
+            if substr in res:
+                return res[substr]
+            tmp=[]
+            if substr in words:
+                tmp.append(substr)
+            for i in range(len(substr)):
+                left=substr[:i]
+                right=substr[i:]
+                if left in words:
+                    tmp+=[left+" "+w for w in helper(right)]
+            res[substr]=tmp
+            return res[substr]
+        
+        return helper(s)
