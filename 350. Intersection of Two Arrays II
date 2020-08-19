@@ -1,0 +1,9 @@
+class Solution:
+    def intersect(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        map1=collections.Counter(nums1)
+        map2=collections.Counter(nums2)
+        res=[]
+        for key, val in map1.items():
+            if key in map2:
+                res.extend([key]*min(val, map2[key]))
+        return res
