@@ -1,0 +1,11 @@
+class Solution:
+    def increasingTriplet(self, nums: List[int]) -> bool:
+        smallest=sec_small=float('inf')
+        for i in range(len(nums)):
+            if smallest>=nums[i]:
+                smallest=nums[i]
+            elif sec_small>=nums[i]:
+                sec_small=nums[i]
+            else:
+                return True
+        return False
