@@ -1,0 +1,10 @@
+        nummap=collections.Counter(nums)
+        tmp=[]
+        for key, val in nummap.items():
+            tmp.append([key, val])
+        tmp.sort(key=lambda x:x[1], reverse=-1)
+        #print(tmp)
+        res=[]
+        for i in range(k):
+            res.append(tmp[i][0])
+        return res
