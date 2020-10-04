@@ -1,0 +1,16 @@
+class Solution:
+    def minMeetingRooms(self, intervals: List[List[int]]) -> int:
+        start=[]
+        end=[]
+        for inter in intervals:
+            start.append(inter[0])
+            end.append(inter[1])
+        start.sort()
+        end.sort()
+        ans, k=0, 0
+        for i in range(len(intervals)):
+            if start[i]<end[k]:
+                ans+=1
+            else:
+                k+=1
+        return ans
