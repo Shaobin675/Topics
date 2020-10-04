@@ -1,0 +1,16 @@
+class Solution:
+    def summaryRanges(self, nums: List[int]) -> List[str]:
+        if not nums:
+            return []
+        nums+=[float('inf')]
+        ans=[]
+        start, p=0, 1
+        while p<len(nums):
+            x=str(nums[start])
+            if nums[p]>nums[p-1]+1:
+                if start<p-1:
+                    x+="->"+ str(nums[p-1])
+                start=p
+                ans.append(x)
+            p+=1
+        return ans
