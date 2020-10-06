@@ -1,0 +1,14 @@
+class Solution:
+    def maxProduct(self, nums: List[int]) -> int:
+        tmp=1
+        ans=nums[0]
+        for n in nums:
+            tmp*=n
+            ans=tmp if tmp>ans else ans
+            tmp=1 if tmp==0 else tmp
+        tmp=1
+        for n in nums[::-1]:
+            tmp*=n
+            ans=tmp if tmp>ans else ans
+            tmp=1 if tmp==0 else tmp
+        return ans
